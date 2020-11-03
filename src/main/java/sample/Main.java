@@ -12,7 +12,7 @@ public class Main extends Application {
 
     GridPane grid = new GridPane();
     final int GRID_SIZE = 4;
-    final int SCRAMBLES = 1000;
+    final int SCRAMBLES = 1001;
     boolean isScramling;
     int emptyX = 3, emptyY = 3;
 
