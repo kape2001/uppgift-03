@@ -53,14 +53,14 @@ public class Main extends Application {
 //            int randomMoveDirection2 = Math.random() < 0.5 ? -1 : 1;
 //            System.out.println("Random direction: " + randomMoveDirection1 + "," + randomMoveDirection2);
 //
-            var btn = getButtonFromGrid(emptyX + moveX, emptyY + moveY);
+            Button btn = getButtonFromGrid(emptyX + moveX, emptyY + moveY);
             if (btn != null) {
                 btn.fire();
             }
         }
         isScramling = false;
 
-        var scene = new Scene(grid, 500, 500);
+        Scene scene = new Scene(grid, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -85,8 +85,8 @@ public class Main extends Application {
         if (!isSafeToMove) return;
 
         // yey, button is safe to move, so lets move it
-        var clickedButton = (Button) getButtonFromGrid(x, y);
-        var emptyButton = (Button) getButtonFromGrid(emptyX, emptyY);
+        Button clickedButton = (Button) getButtonFromGrid(x, y);
+        Button emptyButton = (Button) getButtonFromGrid(emptyX, emptyY);
         emptyButton.setText(clickedButton.getText());
         clickedButton.setText("");
 
@@ -107,10 +107,10 @@ public class Main extends Application {
         for (int y = 0; y < GRID_SIZE; y++) {
             for (int x = 0; x < GRID_SIZE; x++) {
                 cnt++;
-                var btn = (Button) getButtonFromGrid(x, y);
+                Button btn = (Button) getButtonFromGrid(x, y);
                 if (cnt == 16 && btn.getText() == "") return true;
-                var cntString = String.valueOf(cnt);
-                var btnText = btn.getText();
+                String cntString = String.valueOf(cnt);
+                String btnText = btn.getText();
                 if (!cntString.equals(btnText)) return false;
             }
         }
