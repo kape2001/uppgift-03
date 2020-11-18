@@ -13,7 +13,7 @@ public class Main extends Application {
     GridPane grid = new GridPane();
     final int GRID_SIZE = 4;
     final int SCRAMBLES = 1001;
-    boolean isScramling;
+    boolean isScrambling;
     int emptyX = 3, emptyY = 3;
 
     @Override
@@ -24,7 +24,7 @@ public class Main extends Application {
         for (int y = 0; y < GRID_SIZE; y++) {
             for (int x = 0; x < GRID_SIZE; x++) {
                 cnt++;
-                var btn = new Button(String.valueOf(cnt <= 15 ? cnt : ""));
+                Button btn = new Button(String.valueOf(cnt <= 15 ? cnt : ""));
                 btn.setPrefWidth(200);
                 btn.setPrefHeight(200);
                 int finalX = x;
@@ -35,7 +35,7 @@ public class Main extends Application {
         }
 
         // scramble (make a bunch of random, but valid, moves)
-        isScramling = true;
+        isScrambling = true;
         for (int i = 0; i < SCRAMBLES; i++) {
             // lets find a button that is next to the empty space
 
@@ -58,7 +58,7 @@ public class Main extends Application {
                 btn.fire();
             }
         }
-        isScramling = false;
+        isScrambling = false;
 
         Scene scene = new Scene(grid, 500, 500);
         primaryStage.setScene(scene);
@@ -84,9 +84,9 @@ public class Main extends Application {
         if (emptyX == x && emptyY == y + 1) isSafeToMove = true;
         if (!isSafeToMove) return;
 
-        // yey, button is safe to move, so lets move it
-        Button clickedButton = (Button) getButtonFromGrid(x, y);
-        Button emptyButton = (Button) getButtonFromGrid(emptyX, emptyY);
+        // button is safe to move, so lets move it
+        Button clickedButton = getButtonFromGrid(x, y);
+        Button emptyButton = getButtonFromGrid(emptyX, emptyY);
         emptyButton.setText(clickedButton.getText());
         clickedButton.setText("");
 
@@ -94,7 +94,7 @@ public class Main extends Application {
         emptyX = x;
         emptyY = y;
 
-        if (!isScramling && checkIfCompleted()) {
+        if (!isScrambling && checkIfCompleted()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Ny information till dej");
             alert.setContentText("Grattis, du vann!");
@@ -107,8 +107,8 @@ public class Main extends Application {
         for (int y = 0; y < GRID_SIZE; y++) {
             for (int x = 0; x < GRID_SIZE; x++) {
                 cnt++;
-                Button btn = (Button) getButtonFromGrid(x, y);
-                if (cnt == 16 && btn.getText() == "") return true;
+                Button btn = getButtonFromGrid(x, y);
+                if (cnt == 16 && btn.getText().equals("")) return true;
                 String cntString = String.valueOf(cnt);
                 String btnText = btn.getText();
                 if (!cntString.equals(btnText)) return false;
